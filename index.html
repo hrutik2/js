@@ -8,6 +8,7 @@
     #main{
         width: 60%;
         margin: auto;
+        position: relative;
         @media (max-width: 768px) {
             width: 90%;
             margin: auto;
@@ -91,6 +92,7 @@
             }
         }
     }
+    
 </style>
 <body>
     
@@ -168,6 +170,7 @@
 
         </div>
         </div>
+        
     </div>
 </body>
 <script>
@@ -246,15 +249,20 @@ class Animal {
             let btn2=document.createElement("button");
             btn2.innerHTML="Edit";
             btn2.addEventListener("click",()=>{
-                let name=prompt("Enter new name",el.name);
-                let size=prompt("Enter new size",el.size);
-                if(name) el.name=name;
+                let name=prompt("Enter new name",el.name)
+                let size=prompt("Enter new size",el.size)
+                let location=prompt("Enter new location",el.location)
+                let image=prompt("Enter new image",el.image)
+                let species=prompt("Enter new species",el.species)
+                this.data=this.data.map(item=>item.name===el.name?{...item,name,size,location,image,species}:item)
                 this.renderDiv();
             })
             Div.append(species,h3,p1,p2,img,btn,btn2);
             this.div.append(Div)
         })
     }
+    
+  
 
 
     

@@ -1,0 +1,310 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #main{
+        width: 60%;
+        margin: auto;
+        @media (max-width: 768px) {
+            width: 90%;
+            margin: auto;
+        }
+        @media (max-width: 480px) {
+            width: 100%;
+
+        }
+    }
+    #bigCats{
+        width: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+        border-collapse: collapse;
+        text-align: center;
+        div{
+            border: 1px solid black;
+            padding: 10px;
+            h3{
+                font-weight: normal;
+            }
+            img{
+                width:100%;
+              height: 300px;
+                object-fit: contain;
+                margin-bottom: 10px;
+            }
+        }
+    }
+    #dogs{
+        width: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        text-align: center;
+        div{
+            width: 100%;
+            border: 1px solid black;
+            padding: 10px;
+            h3{
+                font-weight: bold;
+            }
+            img{
+                width:100%;
+              height: 300px;
+                object-fit: contain;
+                margin-bottom: 10px;
+                @media (max-width: 768px) {
+                    height: 200px;
+                }
+                @media (max-width: 480px) {
+                    height: 150px;
+                }
+            }
+        }
+    }
+    #bigFish{
+        width: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        text-align: center;
+        div{
+            border: 1px solid black;
+            padding: 10px;
+            h3{
+                 font-weight: bolder;
+                 font-style: italic;
+               
+                color: blue;
+            }
+            img{
+                width:100%;
+              height: 300px;
+                object-fit: contain;
+                margin-bottom: 10px;
+            }
+        }
+    }
+</style>
+<body>
+    
+    <div id="main">
+        <h1>Table :Big Cats</h1>
+        <div>
+            <div >
+               <input type="text" id="species" placeholder="Species">
+                <input type="text" id="name" placeholder="Name">
+                <input type="text" id="size" placeholder="Size in ft">
+                <input type="text" id="location" placeholder="Location">
+                <input type="text" id="image" placeholder="Image">
+                <button id="addNewAnimalforBigCats">Add new animal</button>
+            </div>
+            <div>
+            <select id="sortByforBigCats">
+                <option value="name">name</option>
+                <option value="size">size</option>
+                <option value="location">location</option>
+            </select>
+            <select id="sortOrderforBigCats">
+                <option value="asc">asc</option>
+                <option value="desc">desc</option>
+            </select>
+            </div>
+           <div id="bigCats"></div>
+    
+        </div>
+        <div>
+            <h2>Dogs</h2>
+            <div>
+                <input type="text" id="species" placeholder="Species">
+                <input type="text" id="name" placeholder="Name">
+                <input type="text" id="size" placeholder="Size in ft">
+                <input type="text" id="location" placeholder="Location">
+                <input type="text" id="image" placeholder="Image">
+                <button id="addNewAnimalforDogs">Add new animal</button>
+            </div>
+            <div>
+            <select id="sortByforDogs">
+                <option value="name">name</option>
+                
+                <option value="location">location</option>
+            </select>
+            <select id="sortOrderforDogs">
+                <option value="asc">asc</option>
+                <option value="desc">desc</option>
+            </select>
+            </div>
+        <div id="dogs">
+
+        </div>
+        </div>
+        <div>
+            
+        <h2>Big Fish</h2>
+        <div>
+            <input type="text" id="species" placeholder="Species">
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="size" placeholder="Size in ft">
+            <input type="text" id="location" placeholder="Location">
+            <input type="text" id="image" placeholder="Image">
+            <button id="addNewAnimalforBigFish">Add new animal</button>
+        </div>
+        <div>
+           
+            <select id="sortByforBigFishorder">
+                <option value="asc">asc</option>
+                <option value="desc">desc</option>
+            </select>
+            <button id="sortforBigFish">Sort by size</button>
+        </div>
+
+        <div id="bigFish">
+
+        </div>
+        </div>
+    </div>
+</body>
+<script>
+const bigCatsData = [
+    { "species":"cat", "name": "Tiger", "size": "10", "location": "Asia", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Walking_tiger_female.jpg/1200px-Walking_tiger_female.jpg" },
+    { "species":"cat", "name": "Lion", "size": "12", "location": "Africa", "image": "https://cdn.britannica.com/55/2155-050-604F5A4A/lion.jpg" },
+    { "species":"cat", "name": "Leopard", "size": "8", "location": "Africa", "image": "https://cdn.britannica.com/36/146436-050-6E4ACAA5/Leopard-Samburu-National-Reserve-Kenya.jpg" },
+   
+];
+
+const dogsData = [
+    {"species":"dog", "name": "Bulldog", "size": "3", "location": "Europe", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Bulldog_inglese.jpg/1200px-Bulldog_inglese.jpg" },
+    { "species":"dog", "name": "Labrador", "size": "4", "location": "USA", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Bulldog_inglese.jpg/1200px-Bulldog_inglese.jpg" },
+    { "species":"dog", "name": "German Shepherd", "size": "4.5", "location": "Germany", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Bulldog_inglese.jpg/1200px-Bulldog_inglese.jpg" },
+  
+];
+
+const bigFishData = [
+    { "species":"fish", "name": "Shark", "size": "15", "location": "Oceans", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPLTHjhT_OyqSVashXe9ij_EQ2r4gV5Rrf2Q&s" },
+    { "species":"fish", "name": "Whale", "size": "30", "location": "Oceans", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPLTHjhT_OyqSVashXe9ij_EQ2r4gV5Rrf2Q&s" },
+   
+];
+
+const bigCats=document.getElementById("bigCats");
+const dogs=document.getElementById("dogs");
+const bigFish=document.getElementById("bigFish");
+
+class Animal {
+    constructor(div, jsonData, nameClass) {
+        this.div=div;
+        this.data=jsonData;
+        this.nameClass=nameClass;
+        this.renderDiv();
+
+    }
+    addNewAnimal(){
+        let species=document.getElementById("species").value;
+
+        let name=document.getElementById("name").value;
+        let size=document.getElementById("size").value;
+        let location=document.getElementById("location").value;
+        let image=document.getElementById("image").value;
+        if(species===""||name===""||size===""||location===""||image===""){  
+            alert("Please fill all the fields");
+        }
+        else{
+            this.data=[...this.data,{species,name,size,location,image}]
+            this.renderDiv();
+        }
+        
+    }
+
+    renderDiv() {
+        
+        this.div.innerHTML=""
+
+        this.data.forEach(el=>{
+            let Div=document.createElement("div");
+            let species=document.createElement("p");
+            species.innerHTML=`Species:${el.species}`;
+            let h3=document.createElement("h3")
+
+            h3.innerHTML=`Name:${el.name}`;
+            let p1=document.createElement("p");
+            p1.innerHTML=`Size:${el.size}ft`;
+            let p2=document.createElement("p");
+            p2.innerHTML=`Location:${el.location}`;
+            let img=document.createElement("img");
+            img.src=el.image;
+            img.alt=el.name;
+            let btn=document.createElement("button");
+            btn.innerHTML="Delete";
+            btn.addEventListener("click",()=>{
+                this.div.removeChild(Div);
+            })
+            let btn2=document.createElement("button");
+            btn2.innerHTML="Edit";
+            btn2.addEventListener("click",()=>{
+                let name=prompt("Enter new name",el.name);
+                let size=prompt("Enter new size",el.size);
+                if(name) el.name=name;
+                this.renderDiv();
+            })
+            Div.append(species,h3,p1,p2,img,btn,btn2);
+            this.div.append(Div)
+        })
+    }
+
+
+    
+
+}
+const sortByforBigCats=document.getElementById("sortByforBigCats");
+const sortOrderforBigCats=document.getElementById("sortOrderforBigCats");
+sortByforBigCats.addEventListener("change",()=>{
+    sortOrderforBigCats.addEventListener("change",()=>{
+        let sortBy=sortByforBigCats.value;
+        let sortOrder=sortOrderforBigCats.value;
+        bigCatsData.sort((a,b)=>sortOrder==="asc"?a[sortBy].localeCompare(b[sortBy]):b[sortBy].localeCompare(a[sortBy]));
+        new Animal(bigCats, bigCatsData, "bigCats");
+        
+    })
+})
+const sortByforDogs=document.getElementById("sortByforDogs");
+const sortOrderforDogs=document.getElementById("sortOrderforDogs");
+sortByforDogs.addEventListener("change",()=>{
+    sortOrderforDogs.addEventListener("change",()=>{
+        let sortBy=sortByforDogs.value;
+        let sortOrder=sortOrderforDogs.value;
+        dogsData.sort((a,b)=>sortOrder==="asc"?a[sortBy].localeCompare(b[sortBy]):b[sortBy].localeCompare(a[sortBy]));
+        new Animal(dogs, dogsData, "dogs");
+    })
+})
+
+const addNewAnimalforBigCats=document.getElementById("addNewAnimalforBigCats")
+addNewAnimalforBigCats.addEventListener("click",()=>{
+    new Animal(bigCats, bigCatsData, "bigCats").addNewAnimal()
+})
+const addNewAnimalforDogs=document.getElementById("addNewAnimalforDogs")
+addNewAnimalforDogs.addEventListener("click",()=>{
+    new Animal(dogs, dogsData, "dogs").addNewAnimal()
+})
+
+const sortforBigFish=document.getElementById("sortforBigFish")
+const sortByforBigFishorder=document.getElementById("sortByforBigFishorder")
+sortforBigFish.addEventListener("click",()=>{
+    let sortOrder=sortByforBigFishorder.value;
+    bigFishData.sort((a,b)=>sortOrder==="asc"?a.size.localeCompare(b.size):b.size.localeCompare(a.size));
+
+    new Animal(bigFish, bigFishData, "bigFish");
+})
+
+    
+new Animal(bigCats, bigCatsData, "bigCats");
+new Animal(dogs, dogsData, "dogs");
+new Animal(bigFish, bigFishData, "bigFish");
+
+
+</script>
+</html>
